@@ -2,40 +2,18 @@
 
 public class earthMagic : MonoBehaviour
 {
-    private float timeHeld = 0f;
-    public GameObject rockBarragePrefab;
-    public Transform rightHand;
-    public Transform leftHand;
-    private GameObject currentRockBarrage;
-    private bool active = false;
+    public GameObject rightHand;
+    public GameObject leftHand;
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        if (OVRInput.Get(OVRInput.RawButton.A))
-        {
-            timeHeld += Time.deltaTime;
-            if (timeHeld >= 1f && !active)
-            {
-                timeHeld = timeHeld % 1f;
-                currentRockBarrage = Instantiate(rockBarragePrefab, rightHand.position, rightHand.rotation);
-                active = true;
-            }
-            if (active)
-            {
-                currentRockBarrage.transform.position = rightHand.position;
-                currentRockBarrage.transform.rotation = rightHand.rotation;
-            }
-        }
-        else
-        {
-            timeHeld = 0f;
-            if (active)
-            {
-                active = false;
-                Destroy(currentRockBarrage);
-            }
-        }
-
+        rockBarrage.rightHand = rightHand.transform;
+        rockBarrage.rightHandParticleSystem = rightHand.GetComponent<ParticleSystem>();
     }
+
+    private void Update()
+    {
+        rockBarrage.rockBarrageCheck();
+    }
+    // Update is called once per frame
 }
