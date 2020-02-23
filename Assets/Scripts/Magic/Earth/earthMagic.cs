@@ -21,6 +21,11 @@ public class earthMagic : MonoBehaviour
                 currentRockBarrage = Instantiate(rockBarragePrefab, rightHand.position, rightHand.rotation);
                 active = true;
             }
+            if (active)
+            {
+                currentRockBarrage.transform.position = rightHand.position;
+                currentRockBarrage.transform.rotation = rightHand.rotation;
+            }
         }
         else
         {
